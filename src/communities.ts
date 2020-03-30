@@ -1,4 +1,10 @@
-export const latLongCommunities = [
+export interface DataEntry {
+  name: string;
+  long: number;
+  lat: number;
+}
+
+export const latLongCommunities: DataEntry[] = [
   {
     name: "Madrid",
     long: -3.70256,
