@@ -6,21 +6,32 @@ import { latLongCommunities } from "./communities";
 import {  InitialInfected_stats, FinalInfected_stats, DataEntry} from "./stats";
 
 
-//Calculate the maximum number of affected of all communities:
-
-/*const maxAffected = InitialInfected_stats.reduce(
-  (max, item) => (item.value > max ? item.value : max),
-  0
-);*/
+var color = d3
+  .scaleThreshold<number, string>()
+  .domain([1, 10, 20, 50, 100, 200, 500, 1000, 2000, 3000, 6000, 90000])
+  .range([
+    "#d3dbeb",
+    "#c2cfea",
+    "#b1c3ea",
+    "#9fb8e9",
+    "#8eace8",
+    "#83a2e1",
+    "#7797da",
+    "#6c8dd3",
+    "#6581c4",
+    "#5e76b6",
+    "#566aa7",
+    "#4f5f99"
+    
+  ]);
 
 const svg = d3
   .select("body")
   .append("svg")
   .attr("width", 1024)
   .attr("height", 800)
-  .attr("style", "background-color: #FBFAF0");
+  .attr("style", "background-color: #f4f4f4");
 
-//Tamaño correcto del mapa(Centramos el mapa)
 const aProjection = d3Composite
   .geoConicConformalSpain()
   // Let's make the map bigger to fit in our resolution
@@ -30,15 +41,6 @@ const aProjection = d3Composite
 
 const geoPath = d3.geoPath().projection(aProjection);
 const geojson = topojson.feature(spainjson, spainjson.objects.ESP_adm1);
-
-svg
-  .selectAll("path")
-  .data(geojson["features"])
-  .enter()
-  .append("path")
-  .attr("class", "country")
-  // data loaded from json file
-  .attr("d", geoPath as any);
 
 
 const changeMap = (data: DataEntry[]) =>{
@@ -59,6 +61,26 @@ const changeMap = (data: DataEntry[]) =>{
       const entry = data.find(item => item.name === comunidad);
       return entry ? affectedRadiusScale(entry.value) : 0;
     };
+
+    const assignProvincenColor = (name: string) => {
+      const item =data.find(
+        item => item.name === name
+        );
+        return item ? color(item.value): color(0);
+      };
+      
+    svg
+      .selectAll("path")
+      .data(geojson["features"])
+      .enter()
+      .append("path")
+      .attr("class", "country")
+      .attr("fill",d => assignProvincenColor(d["properties"]["NAME_1"]))
+      .attr("d", geoPath as any)
+      .merge(svg.selectAll("path") as any)
+      .transition()
+      .duration(500)
+      .attr("fill", d=> assignProvincenColor(d["properties"]["NAME_1"]));
 
     const circles = svg.selectAll("circle")
 
@@ -90,12 +112,12 @@ const changeMap = (data: DataEntry[]) =>{
     changeMap(InitialInfected_stats);
   });
 
-document
-  .getElementById("Final")
-  .addEventListener("click", function handleCurrentResults(){
-    console.log("final");
-    changeMap(FinalInfected_stats);
-  });
+  document
+    .getElementById("Final")
+    .addEventListener("click", function handleCurrentResults(){
+      console.log("final");
+      changeMap(FinalInfected_stats);
+    });
 
   changeMap(InitialInfected_stats)
 

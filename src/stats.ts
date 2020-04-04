@@ -3,13 +3,12 @@ export interface DataEntry {
   value: number;
 }
 
-// Approx numbers
-//https://www.elmundo.es/ciencia-y-salud/salud/2020/03/20/5e74b922fc6c839d588b45db.html
-//Datos actualizados a día 22/03/20 para los datos FinalInfected_stats
+// Get data of:
+//https://www.abc.es/sociedad/abci-mapa-coronavirus-espana-evolucion-comunidades-202003251848_noticia.html
 
 export const InitialInfected_stats: DataEntry[] = [
   {
-    name: "Madrid",
+    name: "Comunidad de Madrid",
     value: 587
   },
   {
@@ -25,11 +24,11 @@ export const InitialInfected_stats: DataEntry[] = [
     value: 101
   },
   {
-    name: "Valencia",
+    name: "Comunidad Valenciana",
     value: 50
   },
   {
-    name: "Murcia",
+    name: "Región de Murcia",
     value: 5
   },
   {
@@ -37,7 +36,7 @@ export const InitialInfected_stats: DataEntry[] = [
     value: 7
   },
   {
-    name: "Castilla La Mancha",
+    name: "Castilla-La Mancha",
     value: 26
   },
   {
@@ -73,79 +72,79 @@ export const InitialInfected_stats: DataEntry[] = [
     value: 11
   },
   {
-    name: "Navarra",
+    name: "Comunidad Foral de Navarra",
     value: 13
   }
 ];
 
 export const FinalInfected_stats: DataEntry[] = [
   {
-    name: "Madrid",
-    value: 9702
+    name: "Comunidad de Madrid",
+    value: 27509
   },
   {
     name: "La Rioja",
-    value: 654
+    value: 1810
   },
   {
     name: "Andalucía",
-    value: 1725
+    value: 5818
   },
   {
     name: "Cataluña",
-    value: 4704
+    value: 18773
   },
   {
-    name: "Valencia",
-    value: 1604
+    name: "Comunidad Valenciana",
+    value: 5508
   },
   {
-    name: "Murcia",
-    value: 296
+    name: "Región de Murcia",
+    value: 974
   },
   {
     name: "Extremadura",
-    value: 384
+    value: 1628
   },
   {
-    name: "Castilla La Mancha",
-    value: 1819
+    name: "Castilla-La Mancha",
+    value: 6424
   },
   {
     name: "País Vasco",
-    value: 2097
+    value: 6320
   },
   {
     name: "Cantabria",
-    value: 282
+    value: 	1171
   },
   {
     name: "Asturias",
-    value: 545
+    value: 1236
   },
   {
     name: "Galicia",
-    value: 915
+    value: 4039
   },
   {
     name: "Aragón",
-    value: 532
+    value: 2272
   },
   {
     name: "Castilla y León",
-    value: 1744
+    value: 6211
   },
   {
     name: "Islas Canarias",
-    value: 414
+    value: 1262
   },
   {
     name: "Islas Baleares",
-    value: 331
+    value: 	1069
   },
   {
-    name: "Navarra",
-    value: 794
+    name: "Comunidad Foral Navarra",
+    value: 2305
   }
 ];
 
